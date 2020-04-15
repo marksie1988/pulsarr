@@ -1,0 +1,9 @@
+botName: pulsarr
+botToken: ASDJJIvsdifnakshd823848719ujkashf78wtg
+botPrefix: . 
+sonarr: 
+    host:
+    port:
+radarr:
+    host:
+    port:

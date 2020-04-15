@@ -1,0 +1,6 @@
+#Ignore dir
+venv
+.vscode
+*__pycache__
+config.yml
+!.stubs/config.yml
