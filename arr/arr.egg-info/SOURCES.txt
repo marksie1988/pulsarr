@@ -1,0 +1,9 @@
+setup.py
+arr/__init__.py
+arr/request_api.py
+arr/sonarr_api.py
+arr.egg-info/PKG-INFO
+arr.egg-info/SOURCES.txt
+arr.egg-info/dependency_links.txt
+arr.egg-info/requires.txt
+arr.egg-info/top_level.txt

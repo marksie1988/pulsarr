@@ -1,7 +1,7 @@
 
 import discord, yaml, requests
 from discord.ext import commands
-from .arr.sonarr_api import SonarrAPI
+from arr import SonarrAPI
 
 with open("config.yml", "r") as ymlfile:
     try:
@@ -11,6 +11,7 @@ with open("config.yml", "r") as ymlfile:
 
 sonarrHost = config['sonarr']['host']
 sonarrToken = config['sonarr']['token']
+sonarr = SonarrAPI(sonarrHost, sonarrToken)
 
 with open("config.yml", "r") as ymlfile:
     try:
@@ -24,10 +25,10 @@ class Sonarr(commands.Cog):
 
     @commands.command()
     async def status(self, ctx):
-        """Show example of connecting to your Sonarr instance."""
-        async with Sonarr(sonarrHost, sonarrToken) as sonarr:
-            info = sonarr.update()
-            await ctx.send(info)
+        """- Show tatus of your Sonarr instance."""
+        sysStatus = sonarr.get_system_status
+
+        await ctx.send()
 
 def setup(bot):
     bot.add_cog(Sonarr(bot))
