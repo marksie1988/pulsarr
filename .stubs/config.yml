@@ -2,8 +2,8 @@ botName: pulsarr
 botToken: ASDJJIvsdifnakshd823848719ujkashf78wtg
 botPrefix: . 
 sonarr: 
-    host:
-    port:
+    host: https://sonar.server.com
+    token: 102y3asdih2quheh
 radarr:
     host:
-    port:
+    token:
