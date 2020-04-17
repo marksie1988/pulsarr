@@ -10,7 +10,7 @@ with open("config.yml", "r") as ymlfile:
 
 BOT_NAME = config['botName']
 
-class System(commands.Cog):
+class Settings(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -25,5 +25,7 @@ class System(commands.Cog):
         else:
             await ctx.channel.purge(limit=amount)
 
+
+
 def setup(bot):
-    bot.add_cog(System(bot))
+    bot.add_cog(Settings(bot))

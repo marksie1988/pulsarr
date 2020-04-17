@@ -11,7 +11,14 @@ BOT_NAME = config['botName']
 BOT_TOKEN = config['botToken']
 BOT_PREFIX = config['botPrefix']
 
-bot = commands.Bot(command_prefix = BOT_PREFIX)
+# TODO: add mongodb with guilds for server specific prefixes
+def get_prefix(bot, message):
+    if not message.guild: 
+        return commands.when_mentioned_or("pulsarr ")(bot, message)
+    else:
+        return commands.when_mentioned_or(BOT_PREFIX)(bot, message)
+
+bot = commands.Bot(command_prefix = get_prefix)
 
 @bot.command()
 async def load(ctx, extension):
