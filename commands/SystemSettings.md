@@ -8,14 +8,6 @@ nav_order: 1
 
 Settings Commands are any commands related to the bot settings or system.
 
-## Help Command
-
-The help command allows you to quickly list all possible commands that
-are implemented at this moment in time
-
-```shell
-/pulsarr help
-```
 
 ## Clear Command
 
