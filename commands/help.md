@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Help
+title: Help Commands
 nav_order: 10
 ---
 
-# Help Command
+# Help Commands
 
 The help command displays all of the Cogs (modules) for this bot
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: System & Settings Commands
-nav_order: 1
+nav_order: 9
 ---
 
 # System & Settings Commands

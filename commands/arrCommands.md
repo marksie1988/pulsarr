@@ -1,12 +1,12 @@
 ---
 layout: default
-title: arrCommands
-nav_order: 2
+title: Arr Commands
+nav_order: 1
 ---
 
-# arrCommands
+# Arr Commands
 
-arrCommands are all of the commands that relate to Sonarr or Radarr functions
+Arr Commands are all of the commands that relate to Sonarr or Radarr functions
 
 ## search
 
@@ -17,13 +17,13 @@ a search term or TVDB ID
 /pulsarr search show 'the walking dead'
 ```
 
-![screenshot](assets/images/screenshots/search-term.png)
+![screenshot](../assets/images/screenshots/search-term.png)
 
 ```shell
 /pulsarr search show 153021
 ```
 
-![screenshot](assets/images/screenshots/search-153021.png)
+![screenshot](../assets/images/screenshots/search-153021.png)
 
 ## status
 
@@ -33,7 +33,7 @@ This command will show you the status of the Sonarr & Radarr servers:
 /pulsarr status
 ```
 
-![screenshot](assets/images/screenshots/status.png)
+![screenshot](../assets/images/screenshots/status.png)
 
 ## diskSpace
 
@@ -43,4 +43,4 @@ Shows how much disk space is available on the Sonarr & Radarr volumes:
 /pulsarr diskSpace
 ```
 
-![screenshot](assets/images/screenshots/diskSpace.png)
+![screenshot](../assets/images/screenshots/diskSpace.png)
