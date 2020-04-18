@@ -1,4 +1,4 @@
-import discord, os, yaml
+import discord, asyncio, os, yaml
 from discord.ext import commands
 
 with open("config.yml", "r") as ymlfile:
@@ -18,7 +18,8 @@ def get_prefix(bot, message):
     else:
         return commands.when_mentioned_or(BOT_PREFIX)(bot, message)
 
-bot = commands.Bot(command_prefix = get_prefix)
+bot = commands.Bot(command_prefix = get_prefix, case_insensitive=True)
+bot.remove_command('help')
 
 @bot.command()
 async def load(ctx, extension):

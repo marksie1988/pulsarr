@@ -1,4 +1,4 @@
-import discord, yaml, requests
+import discord, asyncio, yaml, requests
 from discord.ext import commands
 from PyArr import SonarrAPI
 
@@ -12,13 +12,15 @@ sonarrHost = config['sonarr']['host']
 sonarrToken = config['sonarr']['token']
 sonarr = SonarrAPI(sonarrHost, sonarrToken)
 
-class arrCommands(commands.Cog):
+class arrCommands(commands.Cog, name='Arr'):
+    """All Sonarr & Radarr related commands"""
+
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command()
     async def status(self, ctx):
-        """- Show status of your Sonarr instance."""
+        """Show status of your Sonarr instance."""
         sysStatus = sonarr.get_system_status()
         stautsEmbed = discord.Embed(
             title = 'Sonarr Status',
@@ -36,7 +38,7 @@ class arrCommands(commands.Cog):
 
     @commands.command()
     async def diskSpace(self, ctx):
-        """- Show diskspace of your Sonarr instance."""
+        """Show diskspace of your Sonarr instance."""
         diskSpace = sonarr.get_diskspace()
 
         def GetHumanReadable(size,precision=2):
@@ -71,7 +73,7 @@ class arrCommands(commands.Cog):
 
     @commands.command()
     async def search(self, ctx, mediaType='show', term=None):
-        """- Lookup a series based on a search term"""
+        """Lookup a series based on a search term"""
         if term == None:
             await ctx.send('search requires `search <movie|show> <"the title"|tvdb-id>`\n')
         elif mediaType == 'show':
@@ -94,3 +96,4 @@ class arrCommands(commands.Cog):
 
 def setup(bot):
     bot.add_cog(arrCommands(bot))
+    print('arrCommands is loaded')
