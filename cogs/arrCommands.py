@@ -1,8 +1,6 @@
-
 import discord, yaml, requests
 from discord.ext import commands
 from PyArr import SonarrAPI
-from ..sonarr import Sonarr
 
 with open("config.yml", "r") as ymlfile:
     try:
@@ -13,12 +11,6 @@ with open("config.yml", "r") as ymlfile:
 sonarrHost = config['sonarr']['host']
 sonarrToken = config['sonarr']['token']
 sonarr = SonarrAPI(sonarrHost, sonarrToken)
-
-with open("config.yml", "r") as ymlfile:
-    try:
-        config = yaml.safe_load(ymlfile)
-    except yaml.YAMLError as exc:
-        print(exc)
 
 class arrCommands(commands.Cog):
     def __init__(self, bot):
@@ -84,10 +76,14 @@ class arrCommands(commands.Cog):
             await ctx.send('search requires `search <movie|show> <"the title"|tvdb-id>`\n')
         elif mediaType == 'show':
             lookup = sonarr.lookup_series(term)
-            formattedResults = "Here are your search results for `" + term + "`:\n"
+            print(lookup)
+            if len(lookup)==0:
+                formattedResults = "No records were returned for that search.\n"
+            else:
+                formattedResults = "Here are your search results for `" + term + "`:\n"
 
-            for result in lookup:
-                formattedResults += "- " + result['title'] + " (" + str(result['year']) + ") `" + str(result['tvdbId']) + "`\n"
+                for result in lookup:
+                    formattedResults += "- " + result['title'] + " (" + str(result['year']) + ") `" + str(result['tvdbId']) + "`\n"
 
             await ctx.send(formattedResults)
 
@@ -95,8 +91,6 @@ class arrCommands(commands.Cog):
             await ctx.send('Radarr movies not implemented yet')
         else:
             await ctx.send('search requires `search <movie|show> <"the title"|tvdb-id>`\n')
-
-        
 
 def setup(bot):
     bot.add_cog(arrCommands(bot))

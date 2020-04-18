@@ -14,7 +14,7 @@ BOT_PREFIX = config['botPrefix']
 # TODO: add mongodb with guilds for server specific prefixes
 def get_prefix(bot, message):
     if not message.guild: 
-        return commands.when_mentioned_or("pulsarr ")(bot, message)
+        return commands.when_mentioned_or("/pulsarr ")(bot, message)
     else:
         return commands.when_mentioned_or(BOT_PREFIX)(bot, message)
 
