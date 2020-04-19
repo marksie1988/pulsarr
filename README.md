@@ -26,5 +26,5 @@ All documentation is available [here](https://marksie1988.github.io/pulsarr)
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2020?color=32cd32&style=for-the-badge
 [releases-shield]: https://img.shields.io/github/v/release/marksie1988/pulsarr?color=32cd32&style=for-the-badge
 [releases]: https://github.com/marksie1988/pulsarr/releases
-[issues-shield]: https://img.shields.io/github/v/issues/marksie1988/pulsarr?color=32cd32&style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/marksie1988/pulsarr?color=32cd32&style=for-the-badge
 [issues]: https://github.com/marksie1988/pulsarr/issues
