@@ -80,7 +80,7 @@ class arrCommands(commands.Cog, name='Arr'):
             term = "%20".join(args)
 
             lookup = sonarr.lookup_series(term)
-            print(lookup)
+
             if len(lookup)==0:
                 formattedResults = "No records were returned for that search.\n"
             else:
@@ -95,6 +95,58 @@ class arrCommands(commands.Cog, name='Arr'):
             await ctx.send('Radarr movies not implemented yet')
         else:
             await ctx.send('search requires `search <movie|series> <"the title"|tvdb-id>`\n')
+
+    @commands.command()
+    async def add(self, ctx, *args):
+        argCount = len(args)
+        if argCount < 2 > 2:
+            #TODO: error
+            return
+
+        mediaType = args[0]
+        mediaId = args[1]
+
+        if not mediaId:
+            #TODO: Error
+            return
+
+        if mediaType == 'series':
+            #TODO: add stuff
+            return
+        elif mediaType == 'movies':
+            #TODO: not implemented
+            return
+        else:
+            #TODO: error
+            return
+
+    @commands.command()
+    async def quality(self, ctx, *args):
+        """Get the quality profiles"""
+        argCount = len(args)
+        if argCount < 1:
+            await ctx.send('Missing Argument: quality requires `quality <movie|series>`\n')
+            return
+        mediaType = args[0]
+
+        if mediaType == 'series': 
+            profiles = sonarr.get_quality_profiles()
+            profileCount = len(profiles)
+
+            if profileCount < 1:
+                formattedResults = "No records were returned for that search.\n"
+            else:
+                formattedResults = "Here are your quality profiles:\n"
+                print(profiles)
+                for profile in profiles:
+                    formattedResults += "- `" + str(profile['id']) + "`" + profile['name'] + "\n"
+
+            await ctx.send(formattedResults)
+
+        elif mediaType == 'movie':
+            await ctx.send('Radarr movies not implemented yet')
+        else:
+            await ctx.send('quality requires `quality <movie|series>`\n')
 
 def setup(bot):
     bot.add_cog(arrCommands(bot))
