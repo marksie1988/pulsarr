@@ -30,7 +30,8 @@ Missing features are listed in the GitHub issues with the
 and any known issues are listed with the
 [bug label](https://github.com/marksie1988/pulsarr/issues?q=is%3Aissue+is%3Aopen+label%3Abug).
 
-## Contributions
+## Contributions & Support
 
-Contributions are welcomed, this bot has been made on my own time, if you use this bot please consider
+Contributions & Support is welcomed, this bot has been made on my own time.
+
 [![coffee](https://www.buymeacoffee.com/assets/img/custom_images/black_img.png)](https://www.buymeacoffee.com/marksie1988)
