@@ -72,11 +72,11 @@ class arrCommands(commands.Cog, name='Arr'):
             await ctx.send(embed=diskEmbed)
 
     @commands.command()
-    async def search(self, ctx, mediaType='show', term=None):
+    async def search(self, ctx, mediaType='series', term=None):
         """Lookup a series based on a search term"""
         if term == None:
-            await ctx.send('search requires `search <movie|show> <"the title"|tvdb-id>`\n')
-        elif mediaType == 'show':
+            await ctx.send('search requires `search <movie|series> <"the title"|tvdb-id>`\n')
+        elif mediaType == 'series':
             lookup = sonarr.lookup_series(term)
             print(lookup)
             if len(lookup)==0:
@@ -92,7 +92,7 @@ class arrCommands(commands.Cog, name='Arr'):
         elif mediaType == 'movie':
             await ctx.send('Radarr movies not implemented yet')
         else:
-            await ctx.send('search requires `search <movie|show> <"the title"|tvdb-id>`\n')
+            await ctx.send('search requires `search <movie|series> <"the title"|tvdb-id>`\n')
 
 def setup(bot):
     bot.add_cog(arrCommands(bot))
