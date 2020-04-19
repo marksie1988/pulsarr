@@ -72,17 +72,19 @@ class arrCommands(commands.Cog, name='Arr'):
             await ctx.send(embed=diskEmbed)
 
     @commands.command()
-    async def search(self, ctx, mediaType='series', term=None):
+    async def search(self, ctx, mediaType, *args):
         """Lookup a series based on a search term"""
-        if term == None:
+        if len(args) <= 1:
             await ctx.send('search requires `search <movie|series> <"the title"|tvdb-id>`\n')
         elif mediaType == 'series':
+            term = "%20".join(args)
+
             lookup = sonarr.lookup_series(term)
             print(lookup)
             if len(lookup)==0:
                 formattedResults = "No records were returned for that search.\n"
             else:
-                formattedResults = "Here are your search results for `" + term + "`:\n"
+                formattedResults = "Here are your search results for `" + term.replace('%20', ' ') + "`:\n"
 
                 for result in lookup:
                     formattedResults += "- " + result['title'] + " (" + str(result['year']) + ") `" + str(result['tvdbId']) + "`\n"
