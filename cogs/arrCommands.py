@@ -18,6 +18,14 @@ class arrCommands(commands.Cog, name='Arr'):
     def __init__(self, bot):
         self.bot = bot
 
+    def GetHumanReadable(size,precision=2):
+        suffixes=['B','KB','MB','GB','TB']
+        suffixIndex = 0
+        while size > 1024 and suffixIndex < 4:
+            suffixIndex += 1 #increment the index of the suffix
+            size = size/1024.0 #apply the division
+        return "%.*f%s"%(precision,size,suffixes[suffixIndex])
+
     @commands.command()
     async def status(self, ctx):
         """Show status of your Sonarr instance."""
@@ -40,15 +48,6 @@ class arrCommands(commands.Cog, name='Arr'):
     async def diskSpace(self, ctx):
         """Show diskspace of your Sonarr instance."""
         diskSpace = sonarr.get_diskspace()
-
-        def GetHumanReadable(size,precision=2):
-            suffixes=['B','KB','MB','GB','TB']
-            suffixIndex = 0
-            while size > 1024 and suffixIndex < 4:
-                suffixIndex += 1 #increment the index of the suffix
-                size = size/1024.0 #apply the division
-            return "%.*f%s"%(precision,size,suffixes[suffixIndex])
-
         embedColour = discord.Colour.green()
 
         for disk in diskSpace:
@@ -64,12 +63,44 @@ class arrCommands(commands.Cog, name='Arr'):
 
         for disk in diskSpace:
             path = disk['path']
-            space = GetHumanReadable(disk['freeSpace'])
-            total = GetHumanReadable(disk['totalSpace'])
+            space = self.GetHumanReadable(disk['freeSpace'])
+            total = self.GetHumanReadable(disk['totalSpace'])
             diskEmbed.add_field(name='Path', value=path, inline=True)
             diskEmbed.add_field(name='Free Space', value=space, inline=True)
             diskEmbed.add_field(name='Total Space', value=total, inline=True)
             await ctx.send(embed=diskEmbed)
+
+    @commands.command()
+    async def getfolder(self, ctx, mediaType):
+        """Get the default directory for media storage"""
+        if mediaType == 'series':
+            embedColour = discord.Colour.green()
+            rootFolder = sonarr.get_root_folder()
+
+            for root in rootFolder:
+                freePct = round((root['freeSpace'] / root['totalSpace'] * 100), 2)
+                if freePct < 10:
+                    embedColour = discord.Colour.red()
+
+            diskEmbed = discord.Embed(
+                title = 'Folders',
+                description = '',
+                colour = embedColour
+            )
+            
+            for root in rootFolder:
+                freePct = round((root['freeSpace'] / root['totalSpace'] * 100), 2)
+                if freePct < 10:
+                    embedColour = discord.Colour.red()
+                diskEmbed.add_field(name='Path', value=root['path'], inline=True)
+                diskEmbed.add_field(name='Free Space', value=str(freePct) + '%', inline=True)
+
+            await ctx.send(embed=diskEmbed)
+
+        elif mediaType == 'movie':
+            await ctx.send('Radarr movies not implemented yet')
+        else:
+            await ctx.send('Incorrect media type `getRoot <movie|series>`\n')
 
     @commands.command()
     async def search(self, ctx, mediaType, *args):
@@ -100,24 +131,24 @@ class arrCommands(commands.Cog, name='Arr'):
     async def add(self, ctx, *args):
         argCount = len(args)
         if argCount < 2 > 2:
-            #TODO: error
+            await ctx.send('Missing Argument: add requires `add <movie|series> <search-id>`\n')
             return
 
         mediaType = args[0]
         mediaId = args[1]
 
         if not mediaId:
-            #TODO: Error
+            await ctx.send('a tmdb/tvdb id is required\n `<movie|series> <id>`')
             return
 
         if mediaType == 'series':
             #TODO: add stuff
             return
         elif mediaType == 'movies':
-            #TODO: not implemented
+            await ctx.send('Radarr movies not implemented yet')
             return
         else:
-            #TODO: error
+            await ctx.send('add requires `<movie|series>`\n')
             return
 
     @commands.command()
@@ -145,8 +176,10 @@ class arrCommands(commands.Cog, name='Arr'):
 
         elif mediaType == 'movie':
             await ctx.send('Radarr movies not implemented yet')
+            return
         else:
             await ctx.send('quality requires `quality <movie|series>`\n')
+            return
 
 def setup(bot):
     bot.add_cog(arrCommands(bot))
