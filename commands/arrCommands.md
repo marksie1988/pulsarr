@@ -46,6 +46,19 @@ getFolder will display the root folder for either Radarr or Sonarr
 
 ## quality
 
+Gets the quality profiles from Sonarr & Radarr, assists with "Add" command:
+
+```shell
+/pulsarr quality <series|movie>
+```
+
+### Example
+
+```shell
+/pulsarr quality series
+```
+
+
 ## status
 
 This command will show you the status of the Sonarr & Radarr servers:
