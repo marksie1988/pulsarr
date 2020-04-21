@@ -105,7 +105,7 @@ class arrCommands(commands.Cog, name='Arr'):
     @commands.command()
     async def search(self, ctx, mediaType, *args):
         """Lookup a series based on a search term"""
-        if len(args) <= 1:
+        if len(args) < 1:
             await ctx.send('search requires `search <movie|series> <"the title"|tvdb-id>`\n')
         elif mediaType == 'series':
             term = "%20".join(args)
@@ -130,19 +130,27 @@ class arrCommands(commands.Cog, name='Arr'):
     @commands.command()
     async def add(self, ctx, *args):
         argCount = len(args)
-        if argCount < 2 > 2:
-            await ctx.send('Missing Argument: add requires `add <movie|series> <search-id>`\n')
+        if argCount < 3 > 3:
+            await ctx.send('Incorrect no of arguments: `add <movie|series> <search-id> <quality-id>`\n')
             return
 
         mediaType = args[0]
         mediaId = args[1]
+        qualityId = args[2]
 
         if not mediaId:
-            await ctx.send('a tmdb/tvdb id is required\n `<movie|series> <id>`')
+            await ctx.send('a tmdb/tvdb id is required\n `<movie|series> <id> <quality-id>`')
+            return
+
+        if not qualityId:
+            await ctx.send('a quality profile id is required\n `<movie|series> <id> <quality-id>`')
             return
 
         if mediaType == 'series':
-            #TODO: add stuff
+            series_json = sonarr.construct_series_json(mediaId, qualityId)
+            print(series_json)
+            addSeries = sonarr.add_series(series_json)
+
             return
         elif mediaType == 'movies':
             await ctx.send('Radarr movies not implemented yet')
