@@ -148,10 +148,9 @@ class arrCommands(commands.Cog, name='Arr'):
 
         if mediaType == 'series':
             series_json = sonarr.construct_series_json(mediaId, qualityId)
-            print(series_json)
             addSeries = sonarr.add_series(series_json)
-
-            return
+            #TODO: embed addSeries data, include poster
+            return 
         elif mediaType == 'movies':
             await ctx.send('Radarr movies not implemented yet')
             return
@@ -176,9 +175,8 @@ class arrCommands(commands.Cog, name='Arr'):
                 formattedResults = "No records were returned for that search.\n"
             else:
                 formattedResults = "Here are your quality profiles:\n"
-                print(profiles)
                 for profile in profiles:
-                    formattedResults += "- `" + str(profile['id']) + "`" + profile['name'] + "\n"
+                    formattedResults += "- `" + str(profile['id']) + "` - " + profile['name'] + "\n"
 
             await ctx.send(formattedResults)
 
