@@ -17,6 +17,7 @@ a search term or TVDB ID
 /pulsarr search <series|movie> <term|tvdb>
 ```
 
+### Examples
 
 ```shell
 /pulsarr search series the walking dead
@@ -29,6 +30,24 @@ a search term or TVDB ID
 ```
 
 ![screenshot](../assets/images/screenshots/search-153021.png)
+
+## add
+
+add will let you add a new series or movie to the library ready for download
+
+```shell
+/pulsarr add <series|movie> <tvdb|imdb> <quality-id>
+```
+Note: IMDB can only be used for movies at the moment due to limitations in the Sonarr API
+
+### Example
+
+```shell
+/pulsarr add series 76316 1
+```
+
+![screenshot](../assets/images/screenshots/add-76316.png)
+
 
 ## getfolder
 
