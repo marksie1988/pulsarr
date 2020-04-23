@@ -149,8 +149,27 @@ class arrCommands(commands.Cog, name='Arr'):
         if mediaType == 'series':
             series_json = sonarr.construct_series_json(mediaId, qualityId)
             addSeries = sonarr.add_series(series_json)
-            #TODO: embed addSeries data, include poster
-            return 
+            if isinstance(addSeries, list):
+                for item in addSeries: 
+                    if item['propertyName'] == 'TvdbId':
+                        await ctx.send(item['errorMessage'])
+
+            else:
+                embed = discord.Embed(
+                    colour = discord.Colour.green()
+                )
+                
+                embed.add_field(name='Year', value=addSeries['year'], inline=True)
+                embed.add_field(name='Seasons', value=addSeries['seasonCount'], inline=True)
+                embed.add_field(name='Status', value=addSeries['status'], inline=True)
+                embed.add_field(name='Network', value=addSeries['network'], inline=True)
+                embed.add_field(name='Overview', value=addSeries['overview'], inline=False)
+                
+                embed.set_thumbnail(url=f'https://artworks.thetvdb.com/banners/posters/{mediaId}-1.jpg')
+                embed.set_author(name=f'Added: {addSeries["title"]}')
+
+                await ctx.send(embed=embed)
+
         elif mediaType == 'movies':
             await ctx.send('Radarr movies not implemented yet')
             return
