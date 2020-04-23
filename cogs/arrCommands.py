@@ -100,7 +100,7 @@ class arrCommands(commands.Cog, name='Arr'):
         elif mediaType == 'movie':
             await ctx.send('Radarr movies not implemented yet')
         else:
-            await ctx.send('Incorrect media type `getRoot <movie|series>`\n')
+            await ctx.send('Incorrect or missing parameters: `getRoot <movie|series>`\n')
 
     @commands.command()
     async def search(self, ctx, mediaType, *args):
@@ -125,7 +125,7 @@ class arrCommands(commands.Cog, name='Arr'):
         elif mediaType == 'movie':
             await ctx.send('Radarr movies not implemented yet')
         else:
-            await ctx.send('search requires `search <movie|series> <"the title"|tvdb-id>`\n')
+            await ctx.send('Incorrect or missing parameters: `search <movie|series> <title|tvdb-id>`\n')
 
     @commands.command()
     async def add(self, ctx, *args):
@@ -174,7 +174,7 @@ class arrCommands(commands.Cog, name='Arr'):
             await ctx.send('Radarr movies not implemented yet')
             return
         else:
-            await ctx.send('add requires `<movie|series>`\n')
+            await ctx.send('Incorrect or missing parameters: `add <movie|series>`\n')
             return
 
     @commands.command()
@@ -203,7 +203,52 @@ class arrCommands(commands.Cog, name='Arr'):
             await ctx.send('Radarr movies not implemented yet')
             return
         else:
-            await ctx.send('quality requires `quality <movie|series>`\n')
+            await ctx.send('Incorrect or missing parameters: `quality <movie|series>`\n')
+            return
+
+    @commands.command()
+    async def wanted(self, ctx, *args):
+        if argCount < 2:
+            await ctx.send('Missing Argument: wanted requires `wanted <movie|series> <title|airdate>`\n')
+            return
+        mediaType = args[0]
+        sortType = args[1]
+
+
+        if mediaType == 'series': 
+            wanted = sonarr.wanted(sortType)
+            if len(wanted)==0:
+                formattedResults = "Looking good, no outstanding episodes!\n"
+            else:
+                formattedResults = "Here are your wanted episodes:\n"
+
+                for result in wanted:
+                    formattedResults += "- " + result['title'] + " (" + str(result['year']) + ") `" + str(result['tvdbId']) + "`\n"
+            await ctx.send(formattedResults)
+        elif mediaType == 'movie':
+            await ctx.send('Radarr movies not implemented yet')
+            return
+        else:
+            await ctx.send('Incorrect or missing parameters: `wanted <movie|series>`\n')
+            return
+
+    @commands.command()
+    async def backups(self, ctx, mediaType):
+        if mediaType == 'series': 
+            backups = sonarr.get_backups()
+            if len(backups)==0:
+                formattedResults = "Oh no, you have no backups!\n"
+            else:
+                formattedResults = "Here are your backups:\n"
+
+                for result in backups:
+                    formattedResults += "- " + result['name'] + " (" + str(result['type']) + ") - " + str(result['time']) + "\n"
+            await ctx.send(formattedResults)
+        elif mediaType == 'movie':
+            await ctx.send('Radarr movies not implemented yet')
+            return
+        else:
+            await ctx.send('Incorrect or missing parameters: `backups <movie|series>`\n')
             return
 
 def setup(bot):
