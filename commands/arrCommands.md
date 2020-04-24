@@ -97,3 +97,13 @@ Shows how much disk space is available on the Sonarr & Radarr volumes:
 ```
 
 ![screenshot](../assets/images/screenshots/diskSpace.png)
+
+## backups
+
+Shows all backups for specified system:
+
+```shell
+/pulsarr backups <series|movie>
+```
+
+![screenshot](../assets/images/screenshots/backups.png)
