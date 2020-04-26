@@ -27,7 +27,7 @@ a search term or TVDB ID
 /pulsarr search <series|movie> <term|tvdb>
 ```
 
-### Examples
+**Example**
 
 ```shell
 /pulsarr search series the walking dead
@@ -51,7 +51,7 @@ add will let you add a new series or movie to the library ready for download
 
 Note: IMDB can only be used for movies at the moment due to limitations in the Sonarr API
 
-### Example
+**Example**
 
 ```shell
 /pulsarr add series 76316 1
@@ -67,7 +67,7 @@ getFolder will display the root folder for either Radarr or Sonarr
 /pulsarr getfolder <series|movie>
 ```
 
-### Example
+**Example**
 
 ```shell
 /pulsarr getfolder series
@@ -81,7 +81,7 @@ Gets the quality profiles from Sonarr & Radarr, assists with "Add" command:
 /pulsarr quality <series|movie>
 ```
 
-### Example
+**Example**
 
 ```shell
 /pulsarr quality series
