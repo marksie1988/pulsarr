@@ -5,6 +5,8 @@ parent: Commands
 nav_order: 4
 ---
 
+{:toc}
+
 # Arr Commands
 
 Arr Commands are all of the commands that relate to Sonarr or Radarr functions
