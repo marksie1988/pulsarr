@@ -1,6 +1,7 @@
 ---
 layout: default
 title: System & Settings Commands
+parent: Commands
 nav_order: 9
 ---
 

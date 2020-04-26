@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Help Commands
+parent: Commands
 nav_order: 10
 ---
 

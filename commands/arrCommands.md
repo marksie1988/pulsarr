@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Arr Commands
-nav_order: 1
+parent: Commands
+nav_order: 3
 ---
 
 # Arr Commands
@@ -38,6 +39,7 @@ add will let you add a new series or movie to the library ready for download
 ```shell
 /pulsarr add <series|movie> <tvdb|imdb> <quality-id>
 ```
+
 Note: IMDB can only be used for movies at the moment due to limitations in the Sonarr API
 
 ### Example
@@ -47,7 +49,6 @@ Note: IMDB can only be used for movies at the moment due to limitations in the S
 ```
 
 ![screenshot](../assets/images/screenshots/add-76316.png)
-
 
 ## getfolder
 
@@ -77,7 +78,6 @@ Gets the quality profiles from Sonarr & Radarr, assists with "Add" command:
 /pulsarr quality series
 ```
 
-
 ## status
 
 This command will show you the status of the Sonarr & Radarr servers:
@@ -97,13 +97,3 @@ Shows how much disk space is available on the Sonarr & Radarr volumes:
 ```
 
 ![screenshot](../assets/images/screenshots/diskSpace.png)
-
-## backups
-
-Shows all backups for specified system:
-
-```shell
-/pulsarr backups <series|movie>
-```
-
-![screenshot](../assets/images/screenshots/backups.png)
