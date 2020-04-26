@@ -5,9 +5,16 @@ parent: Commands
 nav_order: 4
 ---
 
+# Arr Commands
+{: .no_toc }
+
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
 {:toc}
 
-# Arr Commands
+---
 
 Arr Commands are all of the commands that relate to Sonarr or Radarr functions
 
