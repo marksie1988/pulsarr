@@ -1,8 +1,8 @@
 ---
 layout: default
-title: System & Settings Commands
+title: System & Settings
 parent: Commands
-nav_order: 9
+nav_order: 5
 ---
 
 # System & Settings Commands

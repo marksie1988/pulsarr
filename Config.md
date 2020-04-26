@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Config File
-nav_order: 9
+nav_order: 2
 ---
 
 # Config File
